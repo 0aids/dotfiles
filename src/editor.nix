@@ -14,6 +14,7 @@
       vscodium
       kakoune
       kakoune-lsp
+      helix
     ]
   );
 }

@@ -7,7 +7,15 @@
 
 {
   imports = [
-      ./hardware-configuration.nix
-      ./configuration.nix
+    ./hardware-configuration.nix
+    ./configuration.nix
+    ../../src/editor.nix
+    ../../src/pl.nix
+    ../../src/aids.nix
+    ../../src/nix.nix
+    ../../src/cli.nix
+    ../../src/niri.nix
+    ../../src/kanata.nix
+    ../../src/kitty.nix
   ];
 }

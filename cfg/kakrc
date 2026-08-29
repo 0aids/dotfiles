@@ -4,17 +4,29 @@ set-option global tabstop 4
 set-option global indentwidth 4
 add-highlighter global/ number-lines -relative  -hlcursor -separator |
 # UI options
-set-option global ui_options terminal_set_title=false terminal_status_on_top=false terminal_assistant=clippy terminal_enable_mouse=true 
+set-option global ui_options \
+    terminal_set_title=false \
+    terminal_status_on_top=false \
+    terminal_assistant=clippy \
+    terminal_enable_mouse=true 
 # User modes
-# Key mappings
-# Hooks
 declare-user-mode fileSearching
 map global user f ':enter-user-mode fileSearching<ret>' -docstring 'FileSearching mode'
+
+define-command fzf_files %{
+    echo %sh{
+        # Create a new kitty window that is overlayed
+        # then using fzf search for the desired file, with fzf
+        # providing a preview through bat.
+        kitten @ launch --type window \
+                        --wait-for-child-to-exit=yes \
+                        --response-timeout=999 \
+                        --cwd=current
+    }
+}
+
+
 # Absolutely fucking cancer.
-map global fileSearching g %[:evaluate-commands %sh{ set -o pipefail; out=$(fd . --type file --type symlink -print0 | xargs -0 rg -nHL "" | fzf --delimiter=: --nth=3.. --preview '__kak_fzf_bat_preview {1} {2}' --preview-window=right,60% --tmux=center,80%,80% || true); [ -n "$out" ] && printf '%s\n' "$out" | while IFS=: read -r f l _; do echo "edit $f $l"; done || echo "edit $kak_bufname" }<ret>] -docstring 'Grep and edit word in file'
-map global fileSearching f %[:edit %sh{(set -o pipefail; fd . --type file --type symlink | fzf --tmux=center --border=sharp --preview 'bat --style=numbers --color=always --line-range :500 {}') || echo "$kak_bufname" }<ret>] -docstring 'Search for filename and edit it'
-map global fileSearching G %[:evaluate-commands %sh{ set -o pipefail; out=$(fd . --type file --type symlink -print0 --no-ignore-vcs --hidden | xargs -0 rg -nHL "" | fzf --delimiter=: --nth=3.. --preview '__kak_fzf_bat_preview {1} {2}' --preview-window=right,60% --tmux=center,80%,80% || true); [ -n "$out" ] && printf '%s\n' "$out" | while IFS=: read -r f l _; do echo "edit $f $l"; done || echo "edit $kak_bufname" }<ret>] -docstring 'Grep and edit word in file (no ignores)'
-map global fileSearching F %[:edit %sh{(set -o pipefail; fd . --type file --type symlink --no-ignore-vcs --hidden | fzf --tmux=center --border=sharp --preview 'bat --style=numbers --color=always --line-range :500 {}') || echo "$kak_bufname" }<ret>] -docstring 'Search for filename and edit it (no ignored)'
 map global normal <c-/> ':comment-line<ret>'
 
 define-command erase_characters_before_cursor_to_line_begin %{
