@@ -15,7 +15,8 @@
     ../../src/nix.nix
     ../../src/cli.nix
     ../../src/niri.nix
+    ../../src/gui.nix
     ../../src/kanata.nix
-    ../../src/kitty.nix
+    ../../src/filesystem.nix
   ];
 }

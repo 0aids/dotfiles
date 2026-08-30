@@ -15,9 +15,4 @@
     enable = true;
     compositor.name = "niri";
   };
-  environment.systemPackages = lib.mkAfter (with pkgs; [
-    # gui stuff
-    floorp-bin
-    foot
-  ]);
 }

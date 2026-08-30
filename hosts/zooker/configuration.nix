@@ -15,23 +15,6 @@
     ./hardware-configuration.nix
   ];
 
-  fileSystems = {
-    "/".options = [ "compress=zstd" ];
-    "/home".options = [ "compress=zstd" ];
-    "/nix".options = [
-      "compress=zstd"
-      "noatime"
-    ];
-    "/swap".options = [ "noatime" ];
-  };
-
-  swapDevices = [
-    {
-      device = "/swap/swapfile";
-      size = 8 * 1024; # Creates an 8GB swap file
-    }
-  ];
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
