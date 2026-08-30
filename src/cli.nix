@@ -36,4 +36,5 @@
     ]
   );
   documentation.man.enable = true;
+  programs.git.enable = true;
 }
