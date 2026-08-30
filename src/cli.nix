@@ -24,7 +24,6 @@
       file
       tree
       zoxide
-
       (writeShellScriptBin "copy" ''
                 #!/usr/bin/env bash
         		exec dms clipboard copy "$@"
