@@ -12,7 +12,7 @@
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
 ;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
+;; - `doom-variable-pitch-font' -- a non-monospace fonere applicable)
 ;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
 ;; - `doom-symbol-font' -- for symbols
@@ -37,84 +37,53 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type 'relative)
+;; funny disable keybinds for my shitty inverted window keybinds
+(dolist (key '("\M-s" "\M-d" "\M-f" "\M-g" ;; focus shifting
+               "\M-\C-s" "\M-\C-d" "\M-\C-f" "\M-\C-g" ;; pane resizing
+               "\M-w" "\M-v" ;; tab shifting
+               "\M-\C-v" "\M-\C-b" ;; window splitting
+               "\M-\C-c" "\M-\C-q" ;; tab creation and deletion
+               ))
+  (map! :g key nil))
 
-;; Snippet here to ensure that pdf-view-mode turns off line numbers (incompatible)
-(require 'display-line-numbers)
-(defun display-line-numbers--turn-on ()
-  "Turn on `display-line-numbers-mode'."
-  (unless (or (minibufferp) (eq major-mode 'pdf-view-mode))
-    (display-line-numbers-mode)))
-(setq display-line-numbers-type 'visual)
-(global-display-line-numbers-mode 1)
+(map! :gi "M-s" 'evil-window-left)
+(map! :gi "M-f" 'evil-window-down)
+(map! :gi "M-d" 'evil-window-up)
+(map! :gi "M-g" 'evil-window-right)
+
+(map! :gi "C-M-s" 'evil-window-decrease-width)
+(map! :gi "C-M-f" 'evil-window-decrease-height)
+(map! :gi "C-M-d" 'evil-window-increase-height)
+(map! :gi "C-M-g" 'evil-window-increase-width)
+
+(map! :gi "C-M-v" 'evil-window-vsplit)
+(map! :gi "C-M-b" 'evil-window-split)
+
+(map! :gi "C-M-c" '+workspace/close-window-or-workspace)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-(defun my/org-expand-relative-path (path)
-  "Expand a file/path relative to the org-directory"
-  (expand-file-name path org-directory)
-  )
-(setq org-roam-directory (my/org-expand-relative-path "roam"))
-(setq org-roam-db-location (my/org-expand-relative-path "org-roam.db"))
-
-(map! :leader
-      :prefix "n"
-      :desc "Toggle roam buffer"
-      "r" #'org-roam-buffer-toggle
-      :desc "Find node"
-      "f" #'org-roam-node-find
-      :desc "Insert link"
-      "i" #'org-roam-node-insert
-      :desc "Capture to node"
-      "c" #'org-roam-capture
-      :desc "Show graph"
-      "g" #'org-roam-graph
-      :desc "Random node"
-      "R" #'org-roam-node-random
-
-      ;; Dailies
-      :desc "Today"
-      "d" #'org-roam-dailies-goto-today
-      :desc "Yesterday"
-      "y" #'org-roam-dailies-goto-yesterday
-      :desc "Tomorrow"
-      "m" #'org-roam-dailies-goto-tomorrow
-      :desc "Date"
-      "D" #'org-roam-dailies-goto-date)
-(setq org-roam-dailies-directory "dailies/")
-(setq org-roam-dailies-capture-templates
-      '(("d" "default" entry
-         "* %<%H:%M> %?"
-         :target (file+head "%<%Y-%m-%d>.org"
-                            "#+title: %<%Y-%m-%d %A>\n\n* Today\n\n* Tmrw\n\n* Later\n")
-         :empty-lines 1)))
-(after! org
-  (setq org-todo-keywords '((sequence "TODO" "DOIN" "PAUS" "|" "DONE" "NOPE")))
-  (setq org-todo-keyword-faces
-        '(("DOIN" . (:inherit (bold org-todo) :foreground "orange"))
-          ("NOPE" . (:inherit (bold org-todo) :foreground "black" :weight "bold"))
-          ("DONE" . (:inherit (bold org-done)))
-          ("PAUS" . (:inherit (bold org-done) :foreground "white" :weight "bold"))
-          )))
-
-;; Configure org-roam capture - new nodes go to roam/${slug}.org
-(setq org-roam-capture-templates
-      '(("n" "note" plain
-         ""
-         :if-new (file+head "${slug}.org"
-                            "#+title: ${title}\n#+date: %U\n")
-         :unnarrowed t)))
-
-(setq writeroom-width 80)
-(use-package visual-fill-column
-  :hook (org-mode . visual-line-mode)
-  :hook (org-mode . visual-fill-column-mode)
+(setq org-roam-directory "~/org/roam")
+(setq org-roam-db-location "~/org/org-roam.db")
+(use-package! org-journal
   :config
-  (setq-default visual-fill-column-width 100)
-  (setq-default visual-fill-column-center-text nil))
+  (setq org-journal-dir "~/org/journal/")
+  (setq org-journal-file-type 'daily)
+  (setq org-journal-file-format "%Y-%m-%d.org")
+  (setq org-journal-date-format "%A, %d %B %Y")
+  (setq org-journal-enable-agenda-integration t)
+  (setq org-journal-find-file-fn 'find-file)
+  (map! :leader
+        :prefix "n"
+        :desc "open current daily file"
+        "d" #'org-journal-open-current-journal-file
+        )
+  )
 
 ;; code for centering LaTeX previews -- a terrible idea
-(use-package org-latex-preview
+(use-package! org-latex-preview
   :config
   (defun my/org-latex-preview-uncenter (ov)
     (overlay-put ov 'before-string nil))
@@ -154,7 +123,7 @@
 ;; Turn off pretty entities for latex, it becomes annoying when typing
 (setq org-pretty-entities nil)
 
-(use-package org-download
+(use-package! org-download
   :config
   (add-hook 'org-mode-hook 'org-download-enable))
 
@@ -188,3 +157,11 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(setq writeroom-width 70)
+(use-package visual-fill-column
+  :hook (org-mode . visual-line-mode)
+  :hook (org-mode . visual-fill-column-mode)
+  :config
+  (setq-default visual-fill-column-width 100)
+  (setq-default visual-fill-column-center-text nil))

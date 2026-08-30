@@ -120,6 +120,7 @@ binds {
     Mod+WheelScrollRight { focus-column-right; }
     Ctrl+Print { screenshot-screen; }
     Ctrl+XF86Launch1 { screenshot-screen; }
+    Mod+Shift+S { screenshot; }
     Print { screenshot; }
     XF86Launch1 { screenshot; }
     Mod+Shift+E { quit; }

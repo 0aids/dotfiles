@@ -18,6 +18,8 @@
     mpv
     fontconfig
     kitty
+
+    gruvbox-plus-icons
   ]);
 
   fonts = {

@@ -25,6 +25,8 @@
       file
       tree
       zoxide
+      lazygit
+      nix-direnv
       (writeShellScriptBin "copy" ''
                 #!/usr/bin/env bash
         		exec dms clipboard copy "$@"
@@ -37,7 +39,10 @@
   );
   documentation.man.enable = true;
   programs.git.enable = true;
-  programs.starship.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
