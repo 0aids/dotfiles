@@ -10,8 +10,8 @@
     with pkgs;
     [
       vim
-      emacs-gtk
       vscodium
+      emacs-pgtk
       kakoune
       kakoune-lsp
       (writeShellScriptBin "__kak_fzf_bat_preview" ''

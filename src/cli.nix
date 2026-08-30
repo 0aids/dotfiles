@@ -8,6 +8,7 @@
   environment.systemPackages = lib.mkAfter (
     with pkgs;
     [
+      cachix
       # cli tools
       starship
       wget
@@ -36,4 +37,8 @@
   );
   documentation.man.enable = true;
   programs.git.enable = true;
+  programs.starship.enable = true;
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
 }

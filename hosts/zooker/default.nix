@@ -18,5 +18,10 @@
     ../../src/gui.nix
     ../../src/kanata.nix
     ../../src/filesystem.nix
+    ../../src/boot.nix
+    ../../src/printing.nix
+    ../../src/net.nix
+    ../../src/time.nix
+    ../../src/sec.nix
   ];
 }

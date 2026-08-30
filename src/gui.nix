@@ -25,6 +25,7 @@
       packages =  lib.mkAfter (with pkgs.nerd-fonts; [
           iosevka
           blex-mono
+          pkgs.libertinus
       ]);
   };
 }
