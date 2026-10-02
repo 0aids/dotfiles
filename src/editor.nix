@@ -11,6 +11,7 @@
     [
       vim
       vscodium
+      vscode
       emacs-pgtk
       kakoune
       kakoune-lsp

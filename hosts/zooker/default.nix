@@ -24,4 +24,5 @@
     ../../src/time.nix
     ../../src/sec.nix
   ];
+  networking.firewall.trustedInterfaces = [ "wlp0s20f0u3" ];
 }

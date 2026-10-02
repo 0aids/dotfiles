@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "configurations": [
+    {
+      "id": "profile_1789274999899_d5taezp",
+      "name": "study space pls",
+      "outputs": {
+        "Chimei Innolux Corporation 0x15F6 Unknown": {
+          "mode": "1920x1080@60.008",
+          "position": {
+            "x": 2560,
+            "y": 360
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {
+            "layout": null
+          }
+        },
+        "Dell Inc. DELL P2723DE 3P0WMK3": {
+          "mode": "2560x1440@59.951",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        }
+      }
+    },
+    {
+      "id": "profile_1789275005788_0xc4m4x",
+      "name": "default",
+      "outputs": {
+        "Chimei Innolux Corporation 0x15F6 Unknown": {
+          "mode": "1920x1080@60.008",
+          "position": {
+            "x": 374,
+            "y": 1440
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {
+            "layout": null
+          }
+        },
+        "Dell Inc. DELL P2723DE 3P0WMK3": {
+          "mode": "2560x1440@59.951",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        }
+      }
+    },
+    {
+      "id": "auto_a17a0b88",
+      "name": "",
+      "outputs": {
+        "Chimei Innolux Corporation 0x15F6 Unknown": {
+          "mode": "1920x1080@60.008",
+          "position": {
+            "x": 3147,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {
+            "layout": null
+          }
+        }
+      }
+    },
+    {
+      "id": "auto_8d2088a7",
+      "name": "",
+      "outputs": {
+        "Chimei Innolux Corporation 0x15F6 Unknown": {
+          "mode": "1920x1080@60.008",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {
+            "layout": null
+          }
+        },
+        "Dell Inc. DELL P2419H 172ZDZ2": {
+          "mode": "1920x1080@60.000",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": false,
+          "disabled": false,
+          "niri": {}
+        }
+      }
+    }
+  ]
+}

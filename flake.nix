@@ -17,6 +17,7 @@
         inherit system;
         config = {
           allowUnfree = true;
+          allowUnfreePredicate = _: true;
         };
       };
     in
@@ -26,6 +27,7 @@
           inherit system;
           specialArgs = {
               inherit zen-browser;
+              pkgs = pkgs;
           };
           modules = [
             ./hosts/zooker

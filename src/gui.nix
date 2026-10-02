@@ -18,9 +18,14 @@
     mpv
     fontconfig
     kitty
+    qalculate-qt
 
     gruvbox-plus-icons
+
+    sunshine
   ]);
+
+  services.flatpak.enable = true;
 
   fonts = {
       enableDefaultPackages = lib.mkDefault true;

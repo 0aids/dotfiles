@@ -13,6 +13,14 @@
   # Enable firewall by default
   networking.firewall.enable = lib.mkDefault true;
 
+  environment.systemPackages = lib.mkAfter (
+    with pkgs;
+    [
+      hostapd
+      dnsmasq
+    ]
+  );
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;

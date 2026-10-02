@@ -67,20 +67,30 @@
 (setq org-directory "~/org/")
 (setq org-roam-directory "~/org/roam")
 (setq org-roam-db-location "~/org/org-roam.db")
-(use-package! org-journal
-  :config
-  (setq org-journal-dir "~/org/journal/")
-  (setq org-journal-file-type 'daily)
-  (setq org-journal-file-format "%Y-%m-%d.org")
-  (setq org-journal-date-format "%A, %d %B %Y")
-  (setq org-journal-enable-agenda-integration t)
-  (setq org-journal-find-file-fn 'find-file)
-  (map! :leader
-        :prefix "n"
-        :desc "open current daily file"
-        "d" #'org-journal-open-current-journal-file
-        )
-  )
+
+(map! :leader
+      :prefix "n"
+      :desc "Toggle roam buffer"
+      "r" #'org-roam-buffer-toggle
+      :desc "Find node"
+      "f" #'org-roam-node-find
+
+      ;; Dailies
+      :desc "Today"
+      "d" #'org-roam-dailies-goto-today
+      :desc "Yesterday"
+      "y" #'org-roam-dailies-goto-yesterday
+      :desc "Tomorrow"
+      "m" #'org-roam-dailies-goto-tomorrow
+      :desc "Date"
+      "D" #'org-roam-dailies-goto-date)
+(setq org-roam-dailies-directory "dailies/")
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry
+         "* %<%H:%M> %?"
+         :target (file+head "%<%Y-%m-%d>.org"
+                            "#+title: %<%Y-%m-%d %A>\n\n* Today\n\n* Tmrw\n\n* Later\n")
+         :empty-lines 1)))
 
 ;; code for centering LaTeX previews -- a terrible idea
 (use-package! org-latex-preview

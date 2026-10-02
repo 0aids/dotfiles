@@ -16,4 +16,6 @@
     ];
     initialPassword = "nixos";
   };
+  programs.steam.enable = true;
+
 }
