@@ -17,5 +17,8 @@
     initialPassword = "nixos";
   };
   programs.steam.enable = true;
-
+  programs.steam.remotePlay.openFirewall = true;
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom=AU
+  '';
 }

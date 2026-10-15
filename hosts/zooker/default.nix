@@ -23,6 +23,7 @@
     ../../src/net.nix
     ../../src/time.nix
     ../../src/sec.nix
+    ../../src/kde.nix
   ];
   networking.firewall.trustedInterfaces = [ "wlp0s20f0u3" ];
 }

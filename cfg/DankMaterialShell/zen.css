@@ -96,8 +96,8 @@ toolbar .toolbarbutton-1 {
 }
 
 .identity-color-purple {
-  --identity-tab-color: #48540f !important;
-  --identity-icon-color: #48540f !important;
+  --identity-tab-color: #555c34 !important;
+  --identity-icon-color: #555c34 !important;
 }
 
 #zen-appcontent-navbar-container {

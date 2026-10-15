@@ -9,12 +9,14 @@
     with pkgs;
     [
       cachix
+      usbutils
       # cli tools
       starship
       wget
       btop
       tmux
       ripgrep
+      pdfgrep
       fd
       fzf
       bat

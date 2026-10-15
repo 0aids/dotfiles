@@ -10,6 +10,9 @@
     [
       # lsp/language stuff
       tinymist
+
+      texliveFull
+
       nixd
       nixfmt
 
@@ -29,6 +32,7 @@
       llvmPackages_23.libllvm
       gnumake
       cmake
+      ninja
       gdb
       rr
 
@@ -45,6 +49,9 @@
       gradle
       maven
       jdt-language-server
+
+      nodejs
+
     ]
   );
 }

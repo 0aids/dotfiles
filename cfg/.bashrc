@@ -5,6 +5,7 @@ export PATH="$PATH:$(cd ~/.config/; pwd)/emacs/bin"
 eval "$(starship init bash)"
 eval "$(fzf --bash)"
 eval "$(zoxide init bash --cmd cd)"
+eval "$(direnv hook bash)"
 
 function open() {
     nohup xdg-open "$*" > /dev/null 2>&1 & disown

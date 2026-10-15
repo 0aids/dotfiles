@@ -24,4 +24,5 @@
     configFiles = [ "/home/aids/.config/DankMaterialShell/settings.json" ];
     compositor.name = "niri";
   };
+  services.displayManager.defaultSession = lib.mkForce "niri";
 }
