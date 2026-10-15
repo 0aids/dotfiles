@@ -8,7 +8,7 @@
 let
   pinnedPkgsForZotero =
     import
-      (builtins.fetchTarball {
+      (fetchTarball {
         url = "https://github.com/nixos/nixpkgs/archive/c27cdad491a991b11ed731760aa2ef8db0cb0410.tar.gz";
         sha256 = "1r58xn9xdka8bw710i431srl3dmy7dyrhd32rjv709f2mkb6m1ix";
       })

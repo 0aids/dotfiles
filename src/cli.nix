@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  nix-direnv,
   ...
 }:
 {
@@ -28,7 +29,6 @@
       tree
       zoxide
       lazygit
-      nix-direnv
       (writeShellScriptBin "copy" ''
                 #!/usr/bin/env bash
         		exec dms clipboard copy "$@"
@@ -43,7 +43,10 @@
   programs.git.enable = true;
   programs.direnv = {
     enable = true;
-    nix-direnv.enable = true;
+    nix-direnv = {
+      enable = true;
+      package = nix-direnv.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    };
   };
 
   # Enable the OpenSSH daemon.

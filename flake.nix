@@ -7,10 +7,14 @@
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-direnv = {
+        url = "github:nix-community/nix-direnv";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { self, nixpkgs, zen-browser, ... }@inputs:
+    { self, nixpkgs, zen-browser, nix-direnv, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -27,7 +31,8 @@
           inherit system;
           specialArgs = {
               inherit zen-browser;
-              pkgs = pkgs;
+              inherit pkgs;
+              inherit nix-direnv;
           };
           modules = [
             ./hosts/zooker
